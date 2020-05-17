@@ -372,8 +372,16 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  const abc = '0123456789'.split('');
+  let s = '';
+  let dig = num;
+  const mas = abc.slice(0, n);
+  while (dig > 0) {
+    s = String(s) + mas[dig % n];
+    dig = Math.floor(dig / n);
+  }
+  return s.split('').reverse().join('');
 }
 
 
@@ -447,8 +455,25 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[1][1] !== undefined) {
+    const digit = position[1][1];
+    if (position[0][0] === digit && digit === position[2][2]) return digit;
+    if (position[0][2] === digit && digit === position[2][0]) return digit;
+    if (position[0][1] === digit && digit === position[2][1]) return digit;
+    if (position[1][0] === digit && digit === position[1][2]) return digit;
+  }
+  if (position[0][0] !== undefined) {
+    const digit = position[0][0];
+    if (position[0][1] === digit && digit === position[0][2]) return digit;
+    if (position[1][0] === digit && digit === position[2][0]) return digit;
+  }
+  if (position[2][2] !== undefined) {
+    const digit = position[2][2];
+    if (position[2][0] === digit && digit === position[2][1]) return digit;
+    if (position[0][2] === digit && digit === position[1][2]) return digit;
+  }
+  return undefined;
 }
 
 
